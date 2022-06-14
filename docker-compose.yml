@@ -1,0 +1,37 @@
+services:
+  server:
+    container_name: server
+    build: .
+    command: npm start
+    ports:
+      - 3000:3000
+    volumes:
+      - ./src:/usr/app/src
+
+  postgres:
+    image: postgres
+    container_name: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: Busus
+    hostname: postgres,
+    ports:
+      - 15432:5432
+    volumes:
+      - /var/lib/postgres/data
+
+  pgadmin4:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.com.br
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - 16543:80
+    depends_on:
+      - postgres
+    volumes:
+      - /var/lib/pgadmin
+    restart: unless-stopped

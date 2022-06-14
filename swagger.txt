@@ -1,0 +1,9 @@
+swagger:
+    image: swaggerapi/swagger-ui
+    container_name: swagger
+    ports: 
+      - 8080:8080
+    volumes:
+      - /var/lib/swagger
+    environment:
+      API_URL: swagger-config.yaml
