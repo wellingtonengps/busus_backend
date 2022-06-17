@@ -1,6 +1,7 @@
 import express from "express";
 import { AppDataSource } from "./data-source";
 import { User } from "./entity/User";
+var cors = require("cors");
 
 AppDataSource.initialize()
   .then(() => {
@@ -12,6 +13,7 @@ const app = express();
 const port = 3000;
 
 app.use(express.json());
+app.use(cors());
 
 app.get("/", (_, res) => {
   return res.send({

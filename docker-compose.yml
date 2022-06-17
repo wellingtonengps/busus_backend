@@ -3,6 +3,9 @@ services:
     container_name: server
     build: .
     command: npm start
+    depends_on:
+      - postgres
+      - pgadmin4
     ports:
       - 3000:3000
     volumes:
