@@ -28,8 +28,6 @@ export class User {
   })
   phone_number: number;
 
-  @Column({
-    type: "bytea",
-  })
-  profile_image: number;
+  @Column()
+  profile_image: string;
 }
