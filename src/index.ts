@@ -4,6 +4,7 @@ import { User } from "./entity/User";
 import cors from "cors"
 import multer from "multer"; 
 import {v4 as uuidv4} from "uuid"
+import bcrypt from 'bcrypt';
 
 const app = express();
 const port = 3000;
@@ -55,15 +56,19 @@ app.post("/user", upload.single("image"), async (req, res) => {
   const {name, CPF, sus_code, phone_number, password } = req.body;
   const pathImage = req.file?.path;
   console.log(pathImage);
-  
+
+  const passwordHash = bcrypt.hashSync(password, 10);
+
   const user = await AppDataSource.getRepository(User).create({
     name: name,
     CPF: CPF,
     sus_code: sus_code,
     phone_number: phone_number,
-    password: password,
+    password: passwordHash,
     profile_image: pathImage
   });
+
+ 
   const result = await AppDataSource.getRepository(User).save(user); 
   return res.send(result);
 });
