@@ -5,4 +5,5 @@ export interface UserType {
   sus_code: number;
   phone_number: number;
   password: string;
+  profile_image: string;
 }

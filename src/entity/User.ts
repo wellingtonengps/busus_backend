@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Schedule } from "./Schedule";
 
 @Entity()
 export class User {
@@ -30,4 +31,7 @@ export class User {
 
   @Column()
   profile_image: string;
+
+  @OneToMany(() => Schedule, (schedule) => schedule.user)
+  schedules: Schedule[];
 }
